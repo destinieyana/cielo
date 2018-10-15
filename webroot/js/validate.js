@@ -13,12 +13,15 @@ $(document).ready(function(){
                     //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
                     // do what ever you want with the server response
                     //API.respond(jqXhr.responseText);
-                    console.log("--------- RESPONSE ----------");
-                    console.log(status);
-                    console.log(data);
+                    if (data.error) {
+                        alertify.notify(data.error, 'error', 5);
+                        return;
+                    }
+
+                    alertify.notify(data.success, 'success', 5);
                 },
                 error: function() {
-                    //alert('error handling here');
+                    alertify.notify("Sorry, something went wrong. Please try again", 'error', 5);
                 }
             });
         },

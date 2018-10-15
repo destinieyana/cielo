@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=192.168.99.100;dbname=Cielo',
+	'dsn'	=> 'mysql:host=192.168.99.100;dbname=cielo',
 	'hostname' => 'mysql:host=192.168.99.100',
 	'username' => 'root',
 	'password' => 'root',
-	'database' => 'Cielo',
+	'database' => 'cielo',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

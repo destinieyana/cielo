@@ -2,6 +2,8 @@
 
 class User_model extends CI_model{
    
+    const TABLE_NAME = 'user';
+
     public $name;
     public $date_of_birth;
     public $email;
@@ -20,6 +22,11 @@ class User_model extends CI_model{
        $this->email = $this->input->post('email'); 
        $this->fav_color = $this->input->post('fav_color');
 
-       $this->db->insert('user_info', $this);
+       $this->db->insert(self::TABLE_NAME, $this);
+    }
+
+    public function emailIsUnique($email) {
+        return true;
+        return !$this->db->get_where(self::TABLE_NAME, array('email' => $email), 1)->num_rows();
     }
 }
