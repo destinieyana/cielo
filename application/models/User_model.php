@@ -26,7 +26,6 @@ class User_model extends CI_model{
     }
 
     public function emailIsUnique($email) {
-        return true;
         return !$this->db->get_where(self::TABLE_NAME, array('email' => $email), 1)->num_rows();
     }
 }

@@ -10,9 +10,7 @@ $(document).ready(function(){
                 data: datastring,
                 dataType: "json",
                 success: function(data, status, jqXhr){
-                    //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
-                    // do what ever you want with the server response
-                    //API.respond(jqXhr.responseText);
+
                     if (data.error) {
                         alertify.notify(data.error, 'error', 5);
                         return;
@@ -27,16 +25,16 @@ $(document).ready(function(){
         },
         rules: {
             'name': {
-                required: false,
+                required: true,
             },
             'date_of_birth': {
-                required: false,
+                required: true,
             },
             'email': {
-                required: false,
+                required: true,
             },
             'fav_color': {
-                required: false,
+                required: true,
             },
         },
         messages: {

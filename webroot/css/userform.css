@@ -3,6 +3,9 @@
 		background: #344a71;
 		font-family: 'Roboto', sans-serif;
 	}
+    .error{
+        color: rgba(217, 92, 92, 0.95);
+    }
 	.form-control {		
 		min-height: 41px;
 		box-shadow: none;
