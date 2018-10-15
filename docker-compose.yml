@@ -1,7 +1,7 @@
 version: '2'
 services:
     server:
-        image: php:7.2-apache
+        build: ./docker/server/
         volumes:
             - .:/var/www/html
         ports:

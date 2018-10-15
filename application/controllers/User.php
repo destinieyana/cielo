@@ -7,7 +7,6 @@ class User extends CI_Controller{
         //echo "Hello World";
         $this->load->Helper(array('form', 'url'));
         $this->load->view('userform');
-        $this->load->model('user_model');
     }
 
     public function signup()
@@ -25,6 +24,12 @@ class User extends CI_Controller{
             echo json_encode(['error' => $errors]);
         } else {
             echo json_encode(['success' => "Form submitted successfully!"]);
+            $this->load->model('user_model');
+            try {
+                $this->user_model->insert_user_info();
+            } catch (\Exception $e) {
+                print_r($e->getMessage());
+            }
         }
     }
 
