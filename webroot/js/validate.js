@@ -1,25 +1,30 @@
 $(document).ready(function(){
 
+    let generic = "Sorry, something went wrong. Please try again"
+
     $("#userForm").validate({
         submitHandler: function(form){
             var datastring = $(form).serialize();
 
             $.ajax({
                 type: "POST",
-                url: "signup",
+                url: "user/signup",
                 data: datastring,
                 dataType: "json",
-                success: function(data, status, jqXhr){
+                complete: function(jqXHR, status) {
 
-                    if (data.error) {
-                        alertify.notify(data.error, 'error', 5);
-                        return;
+                    try {
+                        let data = JSON.parse(jqXHR.responseText);
+
+                        if (data.success) {
+                            return alertify.notify(data.success, 'success', 5);
+                        }
+
+                        return alertify.notify(data.error || generic, 'error', 5);
+
+                    } catch (e) {
+                        return alertify.notify(generic, 'error', 5);
                     }
-
-                    alertify.notify(data.success, 'success', 5);
-                },
-                error: function() {
-                    alertify.notify("Sorry, something went wrong. Please try again", 'error', 5);
                 }
             });
         },

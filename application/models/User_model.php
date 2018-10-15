@@ -22,10 +22,22 @@ class User_model extends CI_model{
        $this->email = $this->input->post('email'); 
        $this->fav_color = $this->input->post('fav_color');
 
-       $this->db->insert(self::TABLE_NAME, $this);
+       // Try to insert the user. Log any failures so we can backfill later
+       try {
+           $this->db->insert(self::TABLE_NAME, $this);
+       } catch (\Exception $e) {
+
+           error_log(sprintf("Failed to insert the following user: Name(%s) DOB(%s) Email(%s) FavColor(%s)",
+               $this->name,
+               $this->date_of_birth,
+               $this->email,
+               $this->fav_color
+           ));
+       }
     }
 
-    public function emailIsUnique($email) {
+    public function emailIsUnique(string $email): bool
+    {
         return !$this->db->get_where(self::TABLE_NAME, array('email' => $email), 1)->num_rows();
     }
 }
